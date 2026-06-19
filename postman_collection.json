@@ -1,0 +1,725 @@
+{
+	"info": {
+		"_postman_id": "f8a2e2d3-4a1b-4b1a-8c1d-1e2f3a4b5c6d",
+		"name": "NEXT Portfolio 2.0 API",
+		"description": "API collection for testing NEXT Portfolio 2.0 endpoints in Postman or Insomnia.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"admin@example.com\",\n    \"password\": \"password123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"admin@example.com\",\n    \"password\": \"password123\",\n    \"name\": \"Admin Name\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/register",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Profile",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/auth/profile",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Admins",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/auth/admins",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"admins"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Admin By ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/auth/admins/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"admins",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "admin_id_here"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Admin",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"newadmin@example.com\",\n    \"password\": \"password123\",\n    \"name\": \"New Admin\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/admins",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"admins"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Admin",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Updated Admin Name\",\n    \"email\": \"updatedadmin@example.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/admins/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"admins",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "admin_id_here"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Admin",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/auth/admins/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"admins",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "admin_id_here"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Projects",
+			"item": [
+				{
+					"name": "Get All Projects",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/projects",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"projects"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Project by Slug",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/projects/:slug",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"projects",
+								":slug"
+							],
+							"variable": [
+								{
+									"key": "slug",
+									"value": "project-slug-here"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Project",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"My New Project\",\n    \"description\": \"Detailed description of the project.\",\n    \"thumbnail\": \"https://via.placeholder.com/150\",\n    \"liveUrl\": \"https://example.com\",\n    \"githubUrl\": \"https://github.com/user/repo\",\n    \"technologies\": [\"React\", \"Tailwind\", \"Node.js\"],\n    \"category\": \"web\",\n    \"isFeatured\": false,\n    \"isPublished\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/projects",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"projects"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Project",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Updated Project Title\",\n    \"isFeatured\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/projects/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"projects",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "project_id_here"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Project",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/projects/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"projects",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "project_id_here"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Experiences",
+			"item": [
+				{
+					"name": "Get All Experiences",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/experiences",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"experiences"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Experience by Slug",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/experiences/:slug",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"experiences",
+								":slug"
+							],
+							"variable": [
+								{
+									"key": "slug",
+									"value": "experience-slug-here"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Experience",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"company\": \"Google\",\n    \"position\": \"Software Engineer\",\n    \"description\": \"Worked on exciting backend and frontend systems.\",\n    \"location\": \"Mountain View, CA\",\n    \"startDate\": \"2024-01-15T00:00:00.000Z\",\n    \"endDate\": null,\n    \"isCurrentlyWorking\": true,\n    \"technologies\": [\"Go\", \"Python\", \"Docker\"],\n    \"isPublished\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/experiences",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"experiences"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Experience",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"position\": \"Senior Software Engineer\",\n    \"endDate\": \"2025-06-30T00:00:00.000Z\",\n    \"isCurrentlyWorking\": false\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/experiences/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"experiences",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "experience_id_here"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Experience",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/experiences/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"experiences",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "experience_id_here"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Posts",
+			"item": [
+				{
+					"name": "Get All Posts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/posts",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Post by Slug",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/posts/:slug",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"posts",
+								":slug"
+							],
+							"variable": [
+								{
+									"key": "slug",
+									"value": "post-slug-here"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Post",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"How to build a Next.js Portfolio\",\n    \"content\": \"This is a detailed guide on building a modern Next.js portfolio website...\",\n    \"thumbnail\": \"https://via.placeholder.com/150\",\n    \"tags\": [\"Next.js\", \"React\", \"Tailwind\"],\n    \"category\": \"Web Development\",\n    \"isPublished\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/posts",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Post",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Updated Post Title\",\n    \"category\": \"Frontend Development\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/posts/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"posts",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "post_id_here"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Post",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/posts/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"posts",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "post_id_here"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:5000/api/v1",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "your_jwt_token_here",
+			"type": "string"
+		}
+	]
+}
