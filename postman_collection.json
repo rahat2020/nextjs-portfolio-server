@@ -688,6 +688,44 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Upload",
+			"item": [
+				{
+					"name": "Upload Image",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/uploads",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"uploads"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"event": [

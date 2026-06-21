@@ -220,5 +220,28 @@ Manage blog posts.
 
 ---
 
+## 5. Upload Module
+Upload an image to Cloudinary and get back its URL. Use this URL as the `thumbnail` value when creating/updating a Project or Post — this endpoint does **not** create any database record itself.
+
+### Upload Image (Admin Only)
+- **URL**: `/uploads`
+- **Method**: `POST`
+- **Auth Required**: Yes
+- **Body**: `multipart/form-data`
+  - `file`: the image file (jpeg, png, webp, gif, svg — max 5MB)
+- **Response (Success)**:
+  ```json
+  {
+    "success": true,
+    "message": "Image uploaded successfully",
+    "data": {
+      "url": "https://res.cloudinary.com/.../image.jpg",
+      "publicId": "portfolio/abcd1234"
+    }
+  }
+  ```
+
+---
+
 ## Postman Collection
 You can import the `postman_collection.json` file provided in this repository directly into Postman or Insomnia.
