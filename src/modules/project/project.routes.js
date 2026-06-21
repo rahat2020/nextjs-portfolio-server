@@ -13,6 +13,7 @@ router.get("/:slug", ProjectController.getBySlug);
 // Protected routes (admin only)
 router.post("/", auth, validate(createProjectSchema), ProjectController.create);
 router.patch("/:id", auth, validate(updateProjectSchema), ProjectController.update);
+router.put("/:id", auth, validate(updateProjectSchema), ProjectController.update);
 router.delete("/:id", auth, ProjectController.delete);
 
 export default router;

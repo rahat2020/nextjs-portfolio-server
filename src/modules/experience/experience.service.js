@@ -1,14 +1,24 @@
+import mongoose from "mongoose";
 import Experience from "./experience.model.js";
 import AppError from "../../utils/AppError.js";
 import QueryBuilder from "../../utils/queryBuilder.js";
+import NotificationService from "../notification/notification.service.js";
 
 /**
  * Experience service — all business logic for work experiences.
  */
 const ExperienceService = {
   /** Create a new experience */
-  async create(payload) {
+  async create(payload, adminId) {
     const experience = await Experience.create(payload);
+
+    await NotificationService.create({
+      type: "experience",
+      message: `New experience at "${experience.company}" was created`,
+      relatedId: experience._id,
+      createdBy: adminId,
+    });
+
     return experience;
   },
 
@@ -26,9 +36,13 @@ const ExperienceService = {
     return { experiences, meta: builder.meta };
   },
 
-  /** Get a single experience by slug */
+  /** Get a single experience by slug, or by ID as a fallback */
   async getBySlug(slug) {
-    const experience = await Experience.findOne({ slug });
+    const query = mongoose.isValidObjectId(slug)
+      ? { $or: [{ slug }, { _id: slug }] }
+      : { slug };
+
+    const experience = await Experience.findOne(query);
     if (!experience) throw new AppError("Experience not found", 404);
     return experience;
   },

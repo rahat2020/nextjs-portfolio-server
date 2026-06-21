@@ -1,6 +1,8 @@
+import http from "http";
 import app from "./app.js";
 import connectDB from "./config/db.js";
 import config from "./config/index.js";
+import { initSocket } from "./socket/index.js";
 
 /**
  * Handle Uncaught Exceptions
@@ -19,8 +21,11 @@ const startServer = async () => {
     // 1. Connect to MongoDB
     await connectDB();
 
-    // 2. Start Express app
-    const server = app.listen(config.port, () => {
+    // 2. Start Express app (wrapped in a raw HTTP server so Socket.io can attach to it)
+    const httpServer = http.createServer(app);
+    initSocket(httpServer);
+
+    const server = httpServer.listen(config.port, () => {
       console.log(`🚀 Server listening on http://localhost:${config.port}`);
     });
 

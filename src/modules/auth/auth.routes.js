@@ -15,6 +15,7 @@ router.get("/admins", auth, AuthController.getAllAdmins);
 router.get("/admins/:id", auth, AuthController.getAdminById);
 router.post("/admins", auth, validate(createAdminSchema), AuthController.createAdmin);
 router.patch("/admins/:id", auth, validate(updateAdminSchema), AuthController.updateAdmin);
+router.put("/admins/:id", auth, validate(updateAdminSchema), AuthController.updateAdmin);
 router.delete("/admins/:id", auth, AuthController.deleteAdmin);
 
 export default router;

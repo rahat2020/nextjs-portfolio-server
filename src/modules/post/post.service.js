@@ -1,14 +1,24 @@
+import mongoose from "mongoose";
 import Post from "./post.model.js";
 import AppError from "../../utils/AppError.js";
 import QueryBuilder from "../../utils/queryBuilder.js";
+import NotificationService from "../notification/notification.service.js";
 
 /**
  * Post service — all business logic for blog posts.
  */
 const PostService = {
   /** Create a new post */
-  async create(payload) {
+  async create(payload, adminId) {
     const post = await Post.create(payload);
+
+    await NotificationService.create({
+      type: "post",
+      message: `New post "${post.title}" was created`,
+      relatedId: post._id,
+      createdBy: adminId,
+    });
+
     return post;
   },
 
@@ -26,9 +36,13 @@ const PostService = {
     return { posts, meta: builder.meta };
   },
 
-  /** Get a single post by slug */
+  /** Get a single post by slug, or by ID as a fallback */
   async getBySlug(slug) {
-    const post = await Post.findOne({ slug });
+    const query = mongoose.isValidObjectId(slug)
+      ? { $or: [{ slug }, { _id: slug }] }
+      : { slug };
+
+    const post = await Post.findOne(query);
     if (!post) throw new AppError("Post not found", 404);
     return post;
   },

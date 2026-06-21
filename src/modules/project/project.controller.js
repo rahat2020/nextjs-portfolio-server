@@ -8,7 +8,7 @@ import ProjectService from "./project.service.js";
 const ProjectController = {
   /** POST /api/projects */
   create: catchAsync(async (req, res) => {
-    const project = await ProjectService.create(req.body);
+    const project = await ProjectService.create(req.body, req.user.id);
 
     sendResponse(res, {
       statusCode: 201,

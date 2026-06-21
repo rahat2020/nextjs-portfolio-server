@@ -2,6 +2,7 @@ import jwt from "jsonwebtoken";
 import Admin from "./auth.model.js";
 import AppError from "../../utils/AppError.js";
 import config from "../../config/index.js";
+import NotificationService from "../notification/notification.service.js";
 
 /**
  * Auth service — handles business logic for authentication.
@@ -68,12 +69,23 @@ const AuthService = {
   /**
    * Create a new admin.
    */
-  async createAdmin(adminData) {
+  async createAdmin(adminData, createdBy) {
     const existingAdmin = await Admin.findOne({ email: adminData.email });
     if (existingAdmin) {
       throw new AppError("Admin with this email already exists", 400);
     }
-    return Admin.create(adminData);
+    const admin = await Admin.create(adminData);
+
+    if (createdBy) {
+      await NotificationService.create({
+        type: "admin",
+        message: `New admin "${admin.name}" was created`,
+        relatedId: admin._id,
+        createdBy,
+      });
+    }
+
+    return admin;
   },
 
   /**

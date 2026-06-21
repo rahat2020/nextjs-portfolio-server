@@ -13,6 +13,7 @@ router.get("/:slug", ExperienceController.getBySlug);
 // Protected routes (admin only)
 router.post("/", auth, validate(createExperienceSchema), ExperienceController.create);
 router.patch("/:id", auth, validate(updateExperienceSchema), ExperienceController.update);
+router.put("/:id", auth, validate(updateExperienceSchema), ExperienceController.update);
 router.delete("/:id", auth, ExperienceController.delete);
 
 export default router;

@@ -8,7 +8,7 @@ import ExperienceService from "./experience.service.js";
 const ExperienceController = {
   /** POST /api/experiences */
   create: catchAsync(async (req, res) => {
-    const experience = await ExperienceService.create(req.body);
+    const experience = await ExperienceService.create(req.body, req.user.id);
 
     sendResponse(res, {
       statusCode: 201,

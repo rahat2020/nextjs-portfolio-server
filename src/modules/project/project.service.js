@@ -1,14 +1,24 @@
+import mongoose from "mongoose";
 import Project from "./project.model.js";
 import AppError from "../../utils/AppError.js";
 import QueryBuilder from "../../utils/queryBuilder.js";
+import NotificationService from "../notification/notification.service.js";
 
 /**
  * Project service — all business logic for portfolio projects.
  */
 const ProjectService = {
   /** Create a new project */
-  async create(payload) {
+  async create(payload, adminId) {
     const project = await Project.create(payload);
+
+    await NotificationService.create({
+      type: "project",
+      message: `New project "${project.title}" was created`,
+      relatedId: project._id,
+      createdBy: adminId,
+    });
+
     return project;
   },
 
@@ -26,9 +36,13 @@ const ProjectService = {
     return { projects, meta: builder.meta };
   },
 
-  /** Get a single project by slug */
+  /** Get a single project by slug, or by ID as a fallback */
   async getBySlug(slug) {
-    const project = await Project.findOne({ slug });
+    const query = mongoose.isValidObjectId(slug)
+      ? { $or: [{ slug }, { _id: slug }] }
+      : { slug };
+
+    const project = await Project.findOne(query);
     if (!project) throw new AppError("Project not found", 404);
     return project;
   },

@@ -64,7 +64,7 @@ const AuthController = {
 
   /** POST /api/auth/admins (protected) */
   createAdmin: catchAsync(async (req, res) => {
-    const admin = await AuthService.createAdmin(req.body);
+    const admin = await AuthService.createAdmin(req.body, req.user.id);
 
     sendResponse(res, {
       statusCode: 201,

@@ -8,7 +8,7 @@ import PostService from "./post.service.js";
 const PostController = {
   /** POST /api/posts */
   create: catchAsync(async (req, res) => {
-    const post = await PostService.create(req.body);
+    const post = await PostService.create(req.body, req.user.id);
 
     sendResponse(res, {
       statusCode: 201,
