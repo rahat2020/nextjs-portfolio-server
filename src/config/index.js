@@ -10,9 +10,10 @@ const config = {
   port: parseInt(process.env.PORT, 10) || 5000,
 
   // MongoDB
-  mongoUri:
-    process.env.MONGO_URI ||
-    `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.vatpd.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`,
+  mongoUri: `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.vatpd.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`,
+  // mongoUri:
+  //   process.env.MONGO_URI ||
+  //   `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.vatpd.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`,
 
   // JWT
   jwt: {
