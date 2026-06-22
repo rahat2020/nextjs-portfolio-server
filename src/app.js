@@ -29,7 +29,7 @@ app.use(
   cors({
     origin: allowedOrigins,
     credentials: true,
-  })
+  }),
 );
 
 // Body parser, reading data from body into req.body
@@ -41,6 +41,11 @@ app.use(express.urlencoded({ extended: true, limit: "10kb" }));
  */
 app.get("/health", (req, res) => {
   res.status(200).json({ status: "OK", timestamp: new Date() });
+});
+
+// home route
+app.get("/", (req, res) => {
+  res.json({ success: true, message: "Welcome to the Portfolio Server API!" });
 });
 
 /**
