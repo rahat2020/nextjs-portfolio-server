@@ -14,7 +14,11 @@ export const initSocket = (httpServer) => {
     cors: {
       origin: config.clientUrl
         ? config.clientUrl.split(",").map((origin) => origin.trim())
-        : ["http://localhost:3000", "http://localhost:5173"],
+        : [
+            "http://localhost:3000",
+            "http://localhost:5173",
+            "https://dashboard-for-kazi-rahat.vercel.app",
+          ],
       credentials: true,
     },
   });
@@ -33,11 +37,15 @@ export const initSocket = (httpServer) => {
 
   io.on("connection", (socket) => {
     socket.join("admins");
-    console.log(`[DEBUG socket] connected: admin=${socket.admin?.id} email=${socket.admin?.email} socketId=${socket.id}`);
+    console.log(
+      `[DEBUG socket] connected: admin=${socket.admin?.id} email=${socket.admin?.email} socketId=${socket.id}`,
+    );
 
     socket.on("disconnect", () => {
       socket.leave("admins");
-      console.log(`[DEBUG socket] disconnected: admin=${socket.admin?.id} socketId=${socket.id}`);
+      console.log(
+        `[DEBUG socket] disconnected: admin=${socket.admin?.id} socketId=${socket.id}`,
+      );
     });
   });
 
@@ -48,7 +56,10 @@ export const initSocket = (httpServer) => {
 export const emitNotification = (notification) => {
   if (!io) return;
   const room = io.sockets.adapter.rooms.get("admins");
-  console.log(`[DEBUG socket] emitNotification: admins in room=${room ? room.size : 0}`, notification);
+  console.log(
+    `[DEBUG socket] emitNotification: admins in room=${room ? room.size : 0}`,
+    notification,
+  );
   io.to("admins").emit("notification:new", notification);
 };
 

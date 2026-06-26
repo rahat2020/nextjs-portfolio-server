@@ -88,7 +88,160 @@ Manage authentication and admin users.
 
 ---
 
-## 2. Project Module
+## 2. About Module
+Manage the portfolio owner's personal and social profile information.
+
+> **Singleton Resource** — Only **one** About Info document exists at a time. There is no `:id` in the URL; all operations target the single document.
+
+### Get About Info
+- **URL**: `/about`
+- **Method**: `GET`
+- **Public**: Yes
+- **Response (Success)**:
+  ```json
+  {
+    "success": true,
+    "message": "About info retrieved successfully",
+    "data": {
+      "_id": "...",
+      "full_name": "Rahat Ahmed",
+      "short_name": "Rahat",
+      "job_title": "Full Stack Developer",
+      "avatar": "https://res.cloudinary.com/.../avatar.jpg",
+      "resume_url": "https://example.com/resume.pdf",
+      "email": "rahat@example.com",
+      "phone": "+880 1700 000000",
+      "location": "Dhaka, Bangladesh",
+      "header_title": "Hi, I'm Rahat 👋",
+      "header_description": "A passionate full-stack developer...",
+      "about_title": "About Me",
+      "about_description": "I build modern web applications...",
+      "linkedin_title": "Connect with me on LinkedIn",
+      "linkedin_link": "https://linkedin.com/in/rahat",
+      "facebook_link": "https://facebook.com/rahat",
+      "twitter_link": "https://twitter.com/rahat",
+      "instagram_link": "https://instagram.com/rahat",
+      "whatsapp_link": "https://wa.me/8801700000000",
+      "github_link": "https://github.com/rahat",
+      "youtube_link": "",
+      "website_link": "https://rahat.dev",
+      "years_of_experience": 3,
+      "projects_completed": 20,
+      "open_to_work": true,
+      "skills": ["React", "Node.js", "MongoDB"],
+      "meta_title": "Rahat Ahmed — Full Stack Developer",
+      "meta_description": "Portfolio of Rahat Ahmed, a full-stack developer...",
+      "createdAt": "2026-06-26T16:00:00.000Z",
+      "updatedAt": "2026-06-26T16:00:00.000Z"
+    }
+  }
+  ```
+
+### Create About Info (Admin Only)
+- **URL**: `/about`
+- **Method**: `POST`
+- **Auth Required**: Yes
+- **Note**: Returns `409 Conflict` if an About Info document already exists. Use `PATCH` to update instead.
+- **Body**:
+  ```json
+  {
+    "full_name": "Rahat Ahmed",
+    "short_name": "Rahat",
+    "job_title": "Full Stack Developer",
+    "avatar": "https://res.cloudinary.com/.../avatar.jpg",
+    "resume_url": "https://example.com/resume.pdf",
+    "email": "rahat@example.com",
+    "phone": "+880 1700 000000",
+    "location": "Dhaka, Bangladesh",
+    "header_title": "Hi, I'm Rahat 👋",
+    "header_description": "A passionate full-stack developer...",
+    "about_title": "About Me",
+    "about_description": "I build modern web applications...",
+    "linkedin_title": "Connect with me on LinkedIn",
+    "linkedin_link": "https://linkedin.com/in/rahat",
+    "facebook_link": "https://facebook.com/rahat",
+    "twitter_link": "https://twitter.com/rahat",
+    "instagram_link": "https://instagram.com/rahat",
+    "whatsapp_link": "https://wa.me/8801700000000",
+    "github_link": "https://github.com/rahat",
+    "youtube_link": "",
+    "website_link": "https://rahat.dev",
+    "years_of_experience": 3,
+    "projects_completed": 20,
+    "open_to_work": true,
+    "skills": ["React", "Node.js", "MongoDB"],
+    "meta_title": "Rahat Ahmed — Full Stack Developer",
+    "meta_description": "Portfolio of Rahat Ahmed..."
+  }
+  ```
+
+### Update About Info — Partial (Admin Only)
+- **URL**: `/about`
+- **Method**: `PATCH`
+- **Auth Required**: Yes
+- **Body**: Any subset of the fields above. Only the fields you send will be updated.
+  ```json
+  {
+    "job_title": "Senior Full Stack Developer",
+    "open_to_work": false,
+    "skills": ["React", "Next.js", "Node.js", "MongoDB", "TypeScript"]
+  }
+  ```
+
+### Replace About Info — Full (Admin Only)
+- **URL**: `/about`
+- **Method**: `PUT`
+- **Auth Required**: Yes
+- **Body**: Same as the `POST` body above. All fields will be overwritten.
+
+### Delete About Info (Admin Only)
+- **URL**: `/about`
+- **Method**: `DELETE`
+- **Auth Required**: Yes
+- **Response (Success)**:
+  ```json
+  {
+    "success": true,
+    "message": "About info deleted successfully",
+    "data": null
+  }
+  ```
+
+#### About Info — Field Reference
+
+| Field | Type | Required | Description |
+|---|---|---|---|
+| `full_name` | String | ✅ Yes | Full display name |
+| `short_name` | String | No | Nickname / short name |
+| `job_title` | String | No | Professional title |
+| `avatar` | URL String | No | Profile photo URL (upload via `/uploads` first) |
+| `resume_url` | URL String | No | Link to downloadable resume/CV |
+| `email` | Email String | No | Contact email address |
+| `phone` | String | No | Contact phone number |
+| `location` | String | No | City/Country |
+| `header_title` | String | No | Hero section headline |
+| `header_description` | String | No | Hero section sub-text |
+| `about_title` | String | No | About section heading |
+| `about_description` | String | No | About section body text |
+| `linkedin_title` | String | No | Label text for the LinkedIn link |
+| `linkedin_link` | URL String | No | LinkedIn profile URL |
+| `facebook_link` | URL String | No | Facebook profile URL |
+| `twitter_link` | URL String | No | Twitter/X profile URL |
+| `instagram_link` | URL String | No | Instagram profile URL |
+| `whatsapp_link` | URL String | No | WhatsApp chat link |
+| `github_link` | URL String | No | GitHub profile URL |
+| `youtube_link` | URL String | No | YouTube channel URL |
+| `website_link` | URL String | No | Personal website URL |
+| `years_of_experience` | Number | No | Total years of experience |
+| `projects_completed` | Number | No | Count of completed projects |
+| `open_to_work` | Boolean | No | Whether currently available for hire |
+| `skills` | String[] | No | List of skill/technology names |
+| `meta_title` | String | No | SEO page title |
+| `meta_description` | String | No | SEO meta description |
+
+---
+
+## 3. Project Module
 Manage portfolio projects.
 
 ### Get All Projects
@@ -133,7 +286,7 @@ Manage portfolio projects.
 
 ---
 
-## 3. Experience Module
+## 4. Experience Module
 Manage work experience.
 
 ### Get All Experiences
@@ -178,7 +331,7 @@ Manage work experience.
 
 ---
 
-## 4. Post Module
+## 5. Post Module
 Manage blog posts.
 
 ### Get All Posts
@@ -220,8 +373,8 @@ Manage blog posts.
 
 ---
 
-## 5. Upload Module
-Upload an image to Cloudinary and get back its URL. Use this URL as the `thumbnail` value when creating/updating a Project or Post — this endpoint does **not** create any database record itself.
+## 6. Upload Module
+Upload an image to Cloudinary and get back its URL. Use this URL as the `thumbnail`, `avatar`, or `resume_url` value when creating/updating any resource — this endpoint does **not** create any database record itself.
 
 ### Upload Image (Admin Only)
 - **URL**: `/uploads`
@@ -240,6 +393,38 @@ Upload an image to Cloudinary and get back its URL. Use this URL as the `thumbna
     }
   }
   ```
+
+---
+
+## 7. Notification Module
+Read and manage system notifications generated by admin actions (create/update/delete on any resource).
+
+> Notifications are created automatically by the server — you cannot manually POST a notification.
+
+- **Get All Notifications**: `GET /notifications` (Auth Required)
+- **Mark as Read**: `PATCH /notifications/:id/read` (Auth Required)
+- **Delete Notification**: `DELETE /notifications/:id` (Auth Required)
+
+---
+
+## Error Response Format
+All errors follow a consistent format:
+```json
+{
+  "success": false,
+  "message": "A human-readable error message",
+  "errors": [ ... ]
+}
+```
+
+| HTTP Status | Meaning |
+|---|---|
+| `400` | Bad Request — validation failed |
+| `401` | Unauthorized — missing or invalid token |
+| `403` | Forbidden — insufficient permissions |
+| `404` | Not Found — resource does not exist |
+| `409` | Conflict — resource already exists (e.g. creating About Info twice) |
+| `500` | Internal Server Error |
 
 ---
 

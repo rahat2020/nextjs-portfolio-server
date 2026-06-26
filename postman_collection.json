@@ -249,6 +249,122 @@
 			]
 		},
 		{
+			"name": "About",
+			"description": "Singleton resource — manage the portfolio owner's personal and social profile info.",
+			"item": [
+				{
+					"name": "Get About Info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/about",
+							"host": ["{{baseUrl}}"],
+							"path": ["about"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create About Info",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"full_name\": \"Rahat Ahmed\",\n    \"short_name\": \"Rahat\",\n    \"job_title\": \"Full Stack Developer\",\n    \"avatar\": \"\",\n    \"resume_url\": \"\",\n    \"email\": \"rahat@example.com\",\n    \"phone\": \"+880 1700 000000\",\n    \"location\": \"Dhaka, Bangladesh\",\n    \"header_title\": \"Hi, I'm Rahat 👋\",\n    \"header_description\": \"A passionate full-stack developer building modern web experiences.\",\n    \"about_title\": \"About Me\",\n    \"about_description\": \"I build modern web applications with React, Next.js and Node.js.\",\n    \"linkedin_title\": \"Connect with me on LinkedIn\",\n    \"linkedin_link\": \"https://linkedin.com/in/rahat\",\n    \"facebook_link\": \"https://facebook.com/rahat\",\n    \"twitter_link\": \"https://twitter.com/rahat\",\n    \"instagram_link\": \"https://instagram.com/rahat\",\n    \"whatsapp_link\": \"https://wa.me/8801700000000\",\n    \"github_link\": \"https://github.com/rahat\",\n    \"youtube_link\": \"\",\n    \"website_link\": \"https://rahat.dev\",\n    \"years_of_experience\": 3,\n    \"projects_completed\": 20,\n    \"open_to_work\": true,\n    \"skills\": [\"React\", \"Next.js\", \"Node.js\", \"MongoDB\"],\n    \"meta_title\": \"Rahat Ahmed — Full Stack Developer\",\n    \"meta_description\": \"Portfolio of Rahat Ahmed, a full-stack developer.\"\n}",
+							"options": {
+								"raw": { "language": "json" }
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/about",
+							"host": ["{{baseUrl}}"],
+							"path": ["about"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update About Info (Partial)",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"job_title\": \"Senior Full Stack Developer\",\n    \"open_to_work\": false,\n    \"skills\": [\"React\", \"Next.js\", \"Node.js\", \"MongoDB\", \"TypeScript\"]\n}",
+							"options": {
+								"raw": { "language": "json" }
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/about",
+							"host": ["{{baseUrl}}"],
+							"path": ["about"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Replace About Info (Full)",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"full_name\": \"Rahat Ahmed\",\n    \"short_name\": \"Rahat\",\n    \"job_title\": \"Senior Full Stack Developer\",\n    \"avatar\": \"\",\n    \"resume_url\": \"\",\n    \"email\": \"rahat@example.com\",\n    \"phone\": \"+880 1700 000000\",\n    \"location\": \"Dhaka, Bangladesh\",\n    \"header_title\": \"Hi, I'm Rahat 👋\",\n    \"header_description\": \"A passionate full-stack developer building modern web experiences.\",\n    \"about_title\": \"About Me\",\n    \"about_description\": \"I build modern web applications with React, Next.js and Node.js.\",\n    \"linkedin_title\": \"Connect with me on LinkedIn\",\n    \"linkedin_link\": \"https://linkedin.com/in/rahat\",\n    \"facebook_link\": \"https://facebook.com/rahat\",\n    \"twitter_link\": \"https://twitter.com/rahat\",\n    \"instagram_link\": \"https://instagram.com/rahat\",\n    \"whatsapp_link\": \"https://wa.me/8801700000000\",\n    \"github_link\": \"https://github.com/rahat\",\n    \"youtube_link\": \"\",\n    \"website_link\": \"https://rahat.dev\",\n    \"years_of_experience\": 4,\n    \"projects_completed\": 25,\n    \"open_to_work\": true,\n    \"skills\": [\"React\", \"Next.js\", \"Node.js\", \"MongoDB\", \"TypeScript\"],\n    \"meta_title\": \"Rahat Ahmed — Senior Full Stack Developer\",\n    \"meta_description\": \"Portfolio of Rahat Ahmed, a senior full-stack developer.\"\n}",
+							"options": {
+								"raw": { "language": "json" }
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/about",
+							"host": ["{{baseUrl}}"],
+							"path": ["about"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete About Info",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/about",
+							"host": ["{{baseUrl}}"],
+							"path": ["about"]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Projects",
 			"item": [
 				{
@@ -720,6 +836,81 @@
 							],
 							"path": [
 								"uploads"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Notifications",
+			"description": "Read-only notifications generated automatically by admin actions.",
+			"item": [
+				{
+					"name": "Get All Notifications",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/notifications",
+							"host": ["{{baseUrl}}"],
+							"path": ["notifications"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Mark Notification as Read",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/notifications/:id/read",
+							"host": ["{{baseUrl}}"],
+							"path": ["notifications", ":id", "read"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "notification_id_here"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Notification",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/notifications/:id",
+							"host": ["{{baseUrl}}"],
+							"path": ["notifications", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "notification_id_here"
+								}
 							]
 						}
 					},
